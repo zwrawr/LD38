@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour {
     public float reloadtime = 0.25f;
     private float left;
 
+
+    public int numGuns = 1;
 	// Use this for initialization
 	void Start () {
 
@@ -49,11 +51,31 @@ public class PlayerController : MonoBehaviour {
     private void Fire() {
 
 
-        Vector3 dir = this.ship.transform.up * 0.675f; //hardcoded distance betweeen player and planet
+        Vector3 dir = this.ship.transform.up * 0.7f; //hardcoded distance betweeen player and planet
 
-        Debug.DrawLine(this.transform.position, dir,Color.blue, 10f);
+        if (this.numGuns == 1 || this.numGuns == 3 || this.numGuns == 5)
+        {
+            Instantiate(this.lazer, dir, this.ship.transform.rotation);
+        }
 
-        GameObject tmp = (GameObject)Instantiate(this.lazer, dir, this.ship.transform.rotation);
+        var perp = Vector3.Cross(Vector3.forward, dir);
+
+        if (this.numGuns == 2 || this.numGuns == 3 || this.numGuns == 4 || this.numGuns == 5)
+        {
+            var left =  dir * 0.9f + perp.normalized * 0.075f;
+            var right = dir * 0.9f - perp.normalized * 0.075f;
+
+            Instantiate(this.lazer, left, this.ship.transform.rotation);
+            Instantiate(this.lazer, right, this.ship.transform.rotation);
+        }
+
+        if (this.numGuns == 4 || this.numGuns == 5) {
+            var left = dir * 0.95f + perp.normalized * 0.035f;
+            var right = dir * 0.95f - perp.normalized * 0.035f;
+
+            Instantiate(this.lazer, left, this.ship.transform.rotation);
+            Instantiate(this.lazer, right, this.ship.transform.rotation);
+        }
 
     }
 }

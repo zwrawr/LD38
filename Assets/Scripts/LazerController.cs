@@ -5,8 +5,14 @@ public class LazerController : MonoBehaviour {
 
     public float speed = 5f;
 
+    public float rnd_max = 1f;
+
 	void Start () {
-	
+        float rnd = Random.Range(-rnd_max, rnd_max);
+
+        var rot = this.transform.rotation;
+        rot.z += rnd;
+        this.transform.rotation = rot;
 	}
 	
 	void FixedUpdate () {
