@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour {
     private void Fire() {
 
 
-        Vector3 dir = this.ship.transform.up * 0.65f; //hardcoded distance betweeen player and planet
+        Vector3 dir = this.ship.transform.up * 0.675f; //hardcoded distance betweeen player and planet
 
         Debug.DrawLine(this.transform.position, dir,Color.blue, 10f);
 
