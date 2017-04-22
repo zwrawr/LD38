@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
 
         hoz -= Input.GetAxis("Horizontal");
 
-        if ( Input.GetButton("Fire1") || Input.GetButton("Fire2")  || Input.GetButton("Fire3") ) {
+        if ( Input.GetButton("Fire1") || Input.GetButton("Fire2")  || Input.GetButton("Fire3") || Input.GetButton("Fire4") ) {
             if (left < 0)
             {
                 Fire();
@@ -49,11 +49,9 @@ public class PlayerController : MonoBehaviour {
     private void Fire() {
 
 
-        Vector3 dir = this.ship.transform.up * 0.6f;
+        Vector3 dir = this.ship.transform.up * 0.65f; //hardcoded distance betweeen player and planet
 
         Debug.DrawLine(this.transform.position, dir,Color.blue, 10f);
-
-        Debug.Log("Fire : " + dir + " : " + Vector3.Angle(Vector3.up ,dir));
 
         GameObject tmp = (GameObject)Instantiate(this.lazer, dir, this.ship.transform.rotation);
 
